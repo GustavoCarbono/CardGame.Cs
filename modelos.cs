@@ -89,10 +89,8 @@ public class Celula
 {
     public int X { get; set; }
     public int Y { get; set; }
-    public Personagem? ocupante { get; set; }
-    public string? personagemPlayer { get; set; }
-    public Obstaculo? obstaculo { get; set; }
-    public string? obstaculoPlayer { get; set; }
+    public bool ocupante { get; set; }
+    public string? idOcupante { get; set; }
 }
 
 public class Tabuleiro
@@ -135,6 +133,7 @@ public class StatusPlayer
 
 public class Unidades
 {
+    public string id { get; set; } = Guid.NewGuid().ToString();
     public string dono { get; set; } = string.Empty;
     public string cartaId { get; set; } = string.Empty;
     public Posicao posicao { get; set; } = new();

@@ -16,6 +16,7 @@
     },
     "unidades": [
         {
+            "id": "0x01",
             "dono": "jogador1",
             "cartaId": "0x01",
             "posicao": {
@@ -32,6 +33,7 @@
             "jaMoveu": false
         },
         {
+            "id": "0x02",
             "dono": "jogador1",
             "cartaId": "0x03",
             "posicao": {
@@ -48,6 +50,7 @@
             "jaMoveu": false
         },
         {
+            "id": "0x03",
             "dono": "jogador2",
             "cartaId": "0x02",
             "posicao": {
@@ -64,6 +67,7 @@
             "jaMoveu": false
         },
         {
+            "id": "0x04",
             "dono": "jogador2",
             "cartaId": "0x04",
             "posicao": {

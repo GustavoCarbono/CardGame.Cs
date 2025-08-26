@@ -1,6 +1,6 @@
 public class ValidarMovimento
 {
-    public int validarMovimentoUnidade(Unidades unidade, Posicao novaPosicao, Partida partida, string dono, int passos)
+    public int validarMovimentoUnidade(Unidades unidade, Tabuleiro tabuleiro, Posicao novaPosicao, Partida partida, string dono, int passos)
     {
         if (novaPosicao.x < 0 || novaPosicao.x > 8 || novaPosicao.y < 0 || novaPosicao.y > 5)
         {
@@ -9,7 +9,14 @@ public class ValidarMovimento
             if (distancia <= passos && (dono == partida.jogador1 ? partida.statusPlayer1 : partida.statusPlayer2)
                 .movRestante >= 1)
             {
-                return 200;
+                if (!tabuleiro.Grid[novaPosicao.x, novaPosicao.y].ocupante)
+                {
+                    return 200;
+                }
+                else
+                {
+                    return 400;
+                }
             }
             else
             {

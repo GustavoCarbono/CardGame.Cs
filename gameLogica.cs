@@ -1,26 +1,22 @@
 public class Movimentacao
 {
 
-    public int movimento(Partida partida, string dono, string cartaId, Posicao novaPosicao)
+    public int movimento(Partida partida, Tabuleiro tabuleiro, string id, string dono, Posicao novaPosicao)
     {
 
         ValidarMovimento validar = new();
 
-        var unidade = partida.unidades.FirstOrDefault(u => u.dono == dono && u.cartaId == cartaId);
+        var unidade = partida.unidades.FirstOrDefault(u => u.id == id);
         if (unidade != null)
         {
-            //verificar se ele já moveu, colocar que moveu, atualizar a tabuleiro e se o caminho não está obstruido
-            if (validar.validarMovimentoUnidade(unidade, novaPosicao, partida, dono, unidade.passos) == 200)
+            //verificar se ele já moveu, colocar que moveu e logar no partida.log
+            if (validar.validarMovimentoUnidade(unidade, tabuleiro, novaPosicao, partida, dono, unidade.passos) == 200)
             {
                 unidade.posicao = novaPosicao;
-                if (dono == "jogador1")
-                {
-                    partida.statusPlayer1.movRestante--;
-                }
-                else
-                {
-                    partida.statusPlayer2.movRestante--;
-                }
+                var movimento = dono == "jogador1" ? partida.statusPlayer1 : partida.statusPlayer2;
+                movimento.movRestante--;
+                tabuleiro.Grid[novaPosicao.x, novaPosicao.y].ocupante = true;
+                tabuleiro.Grid[novaPosicao.x, novaPosicao.y].idOcupante = id;
                 return 200;
             }
             else
@@ -37,11 +33,11 @@ public class Movimentacao
 
 public class UsarHabilidade
 {
-    public int habilidade(Partida partida, string dono, string cartaId, string habilidadeId, List<Alvo> alvos)
+    public int habilidade(Partida partida, string dono, string id, string habilidadeId, List<Alvo> alvos)
     {
 
         ValidarHabilidade validar = new();
-        var unidade = partida.unidades.FirstOrDefault(u => u.dono == dono && u.cartaId == cartaId);
+        var unidade = partida.unidades.FirstOrDefault(u => u.id == id);
         var habilidade = GameData.getHabilidade(habilidadeId);
         if (unidade != null && habilidade != null)
         {
