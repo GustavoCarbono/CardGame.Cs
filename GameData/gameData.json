@@ -6,7 +6,7 @@
             "dano": 15,
             "combate": 10,
             "hp": 40,
-            "gastoMov": 1,
+            "passos": 1,
             "habilidade": ["0x01"]
         },
         {
@@ -15,7 +15,7 @@
             "dano": 10,
             "combate": 5,
             "hp": 20,
-            "gastoMov": 1,
+            "passos": 1,
             "habilidade": ["0x02"]
         },
         {
@@ -24,7 +24,7 @@
             "dano": 1,
             "combate": 2,
             "hp": 15,
-            "gastoMov": 1,
+            "passos": 1,
             "habilidade": ["0x03"]
         },
         {
@@ -33,7 +33,7 @@
             "dano": 2,
             "combate": 5,
             "hp": 30,
-            "gastoMov": 1,
+            "passos": 1,
             "habilidade": ["0x04"]
         },
         {
@@ -42,7 +42,7 @@
             "dano": 0,
             "combate": 0,
             "hp": 10,
-            "gastoMov": 1,
+            "passos": 1,
             "habilidade": ["0x05"]
         }
     ],
@@ -53,14 +53,13 @@
             "descricao": "Aumenta o dano do próximo ataque em 50% tirando 2 de hp.",
             "tipo": "Ativo",
             "tipoDeHabilidade": "ataqueCorpoACorpo",
+            "inimigoMaximo": 4,
+            "areaDeAtaque": 1,
+            "duração": 1,
+            "coodown": 1,
             "efeito": {
-                "qtdeDano": 1.5,
                 "custaHp": true,
-                "custoHp": 2,
-                "duração": 1,
-                "coodown": 1,
-                "danoSimultaneo": true,
-                "areaDeAtaque": "perto"
+                "custoHp": 2
             }
         },
         {
@@ -69,12 +68,13 @@
             "descricao": "Faz um rasto de fogo que causa 3 de dano por 2 turnos.",
             "tipo": "Ativo",
             "tipoDeHabilidade": "feixeMagia",
+            "inimigoMaximo": null,
+            "areaDeAtaque": 4,
+            "duração": 2,
+            "coodown": 3,
             "efeito": {
                 "qtdeDano": 1,
-                "tipoDano": "fogo",
-                "duração": 2,
-                "coodown": 3,
-                "areaDeAtaque": "medio"
+                "tipoDano": "fogo"
             }
         },
         {
@@ -82,14 +82,14 @@
             "nome": "Invocador de cultista",
             "descricao": "Invoca um cultista que ataca inimigos próximos.",
             "tipo": "Ativo",
-            "tipoDeHabilidade": "InvocaçãoFraca",
+            "tipoDeHabilidade": "InvocacaoFraca",
+            "areaDeAtaque": 2,
+            "duração": 2,
+            "coodown": 4,
             "efeito": {
                 "statusInvocado": 0.5,
-                "duração": 2,
-                "coodown": 4,
-                "personagemInvocado": ["0x05"],
-                "qtdeInvocado": 1,
-                "areaDeAtaque": "perto"
+                "personagemInvocavel": ["0x05"],
+                "qtdeInvocado": 1
             }
         },
         {
@@ -97,13 +97,13 @@
             "nome": "Tiro Rapido",
             "descricao": "Atira em dois inimigos em qualquer lugar do campo causando 50% de dano.",
             "tipo": "Ativo",
-            "tipoDeHabilidade": "multiTiro",
+            "tipoDeHabilidade": "tiro",
+            "inimigoMaximo": 2,
+            "areaDeAtaque": 11,
+            "duração": 1,
+            "coodown": 2,
             "efeito": {
-                "qtdeDano": 0.5,
-                "qtdeInimigos": 2,
-                "duração": 1,
-                "coodown": 2,
-                "areaDeAtaque": "total"
+                "qtdeDano": 0.5
             }
         },
         {
@@ -112,12 +112,13 @@
             "descricao": "Deixa o inimigo enfraquecido, reduzindo a vida em 10% por 3 turnos.",
             "tipo": "Ativo",
             "tipoDeHabilidade": "DebuffRInimigo",
+            "inimigoMaximo": 1,
+            "areaDeAtaque": 11,
+            "duração": 3,
+            "coodown": 2,
             "efeito": {
                 "debuff": "hp",
-                "qtdeDebuff": 0.1,
-                "duração": 3,
-                "coodown": 2,
-                "areaDeAtaque": "total"
+                "qtdeDebuff": 0.1
             }
         }
     ],

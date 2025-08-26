@@ -1,20 +1,64 @@
+using System.Text.Json;
+
 //Habilidades e Personagens
 
-public class GameData
+public static class GameData
 {
-    public List<Personagem> Personagem { get; set; } = new();
-    public List<Habilidade> Habilidade { get; set; } = new();
+    public static List<Personagem> Personagem { get; private set; } = new();
+    public static List<Habilidade> Habilidade { get; private set; } = new();
+    public static List<Obstaculo> Obstaculo { get; private set; } = new();
+
+    static GameData()
+    {
+        string caminho = "GameData/gameData.json";
+
+        string json = File.ReadAllText(caminho);
+        var data = JsonSerializer.Deserialize<GameDataArquivo>(json);
+
+        if (data != null)
+        {
+            if (data.Personagem != null) Personagem = data.Personagem;
+            if (data.Habilidade != null) Habilidade = data.Habilidade;
+            if (data.Obstaculo != null) Obstaculo = data.Obstaculo;
+        }
+    }
+
+    public static Personagem? getPersonagem(string codigo)
+    {
+        return Personagem.FirstOrDefault(p => p.codigo == codigo);
+    }
+
+    public static Habilidade? getHabilidade(string codigo)
+    {
+        return Habilidade.FirstOrDefault(h => h.codigo == codigo);
+    }
+    
+    public static Obstaculo? getObstaculo(string codigo)
+    {
+        return Obstaculo.FirstOrDefault(o => o.codigo == codigo);
+    }
+}
+
+public class GameDataArquivo
+{
+public List<Personagem> Personagem { get; set; } = new();
+public List<Habilidade> Habilidade { get; set; } = new();
+public List<Obstaculo> Obstaculo { get; set; } = new();
 }
 
 public class Habilidade
 {
-    public string Codigo { get; set; } = string.Empty;
-    public string Nome { get; set; } = string.Empty;
-    public string Descricao { get; set; } = string.Empty;
-    public string Tipo { get; set; } = string.Empty;
-    public string TipoDeHabilidade { get; set; } = string.Empty;
+    public string codigo { get; set; } = string.Empty;
+    public string nome { get; set; } = string.Empty;
+    public string tescricao { get; set; } = string.Empty;
+    public string tipo { get; set; } = string.Empty;
+    public string tipoDeHabilidade { get; set; } = string.Empty;
+    public int? inimigoMaximo { get; set; }
+    public int areaDeAtaque { get; set; }
+    public int duracao { get; set; }
+    public int coodown { get; set; }
 
-    public Dictionary<string, object> Efeito { get; set; } = new();
+    public Dictionary<string, object> efeito { get; set; } = new();
 }
 public class Personagem
 {
@@ -24,9 +68,20 @@ public class Personagem
     public int combate { get; set; }
     public int hp { get; set; }
     public int gastoMov { get; set; }
+    public int passos { get; set; }
 
-    public string[]? Habilidade { get; set; }
-    public Dictionary<string, object> Extras { get; set; } = new();
+    public string[]? habilidade { get; set; }
+    public Dictionary<string, object> extras { get; set; } = new();
+}
+
+public class Obstaculo
+{
+    public string nome { get; set; } = string.Empty;
+    public string codigo { get; set; } = string.Empty;
+    public int duracao { get; set; }
+    public int dano { get; set; }
+    public bool hitbox { get; set; }
+    public string tipo { get; set; } = string.Empty;
 }
 
 //Tabuleiro e Celula
@@ -36,6 +91,8 @@ public class Celula
     public int Y { get; set; }
     public Personagem? ocupante { get; set; }
     public string? personagemPlayer { get; set; }
+    public Obstaculo? obstaculo { get; set; }
+    public string? obstaculoPlayer { get; set; }
 }
 
 public class Tabuleiro
@@ -85,7 +142,7 @@ public class Unidades
     public int combate { get; set; }
     public int hpMaximo { get; set; }
     public int hpAtual { get; set; }
-    public int gastoMov { get; set; }
+    public int passos { get; set; }
     public bool jaAtacou { get; set; }
 
     public string[]? habilidade { get; set; }

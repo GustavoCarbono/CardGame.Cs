@@ -16,7 +16,7 @@
     },
     "unidades": [
         {
-            "dono": "player1",
+            "dono": "jogador1",
             "cartaId": "0x01",
             "posicao": {
                 "x": 3,
@@ -28,10 +28,11 @@
             "hpMaximo": 40,
             "hpAtual": 40,
             "gastoMov": 1,
-            "jaAtacou": false
+            "jaAtacou": false,
+            "jaMoveu": false
         },
         {
-            "dono": "player1",
+            "dono": "jogador1",
             "cartaId": "0x03",
             "posicao": {
                 "x": 2,
@@ -43,10 +44,11 @@
             "hpMaximo": 15,
             "hpAtual": 15,
             "gastoMov": 1,
-            "jaAtacou": false
+            "jaAtacou": false,
+            "jaMoveu": false
         },
         {
-            "dono": "player2",
+            "dono": "jogador2",
             "cartaId": "0x02",
             "posicao": {
                 "x": 8,
@@ -58,10 +60,11 @@
             "hpMaximo": 40,
             "hpAtual": 40,
             "gastoMov": 1,
-            "jaAtacou": false
+            "jaAtacou": false,
+            "jaMoveu": false
         },
         {
-            "dono": "player2",
+            "dono": "jogador2",
             "cartaId": "0x04",
             "posicao": {
                 "x": 7,
@@ -73,7 +76,8 @@
             "hpMaximo": 15,
             "hpAtual": 15,
             "gastoMov": 1,
-            "jaAtacou": false
+            "jaAtacou": false,
+            "jaMoveu": false
         }
     ],
     "logPlayer1": [
