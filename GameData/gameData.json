@@ -6,6 +6,7 @@
             "dano": 15,
             "combate": 10,
             "hp": 40,
+            "gastoMov": 1,
             "habilidade": ["0x01"]
         },
         {
@@ -14,6 +15,7 @@
             "dano": 10,
             "combate": 5,
             "hp": 20,
+            "gastoMov": 1,
             "habilidade": ["0x02"]
         },
         {
@@ -22,6 +24,7 @@
             "dano": 1,
             "combate": 2,
             "hp": 15,
+            "gastoMov": 1,
             "habilidade": ["0x03"]
         },
         {
@@ -30,6 +33,7 @@
             "dano": 2,
             "combate": 5,
             "hp": 30,
+            "gastoMov": 1,
             "habilidade": ["0x04"]
         },
         {
@@ -38,6 +42,7 @@
             "dano": 0,
             "combate": 0,
             "hp": 10,
+            "gastoMov": 1,
             "habilidade": ["0x05"]
         }
     ],
