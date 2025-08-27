@@ -32,7 +32,7 @@ public class ValidarMovimento
 
 public class ValidarHabilidade
 {
-    public int validarDistancia(Posicao origem, Posicao alvo, string? tipoDistancia, int areaDeAtaque)
+    public int validarDistancia(Posicao origem, Posicao alvo, string? tipoDistancia, int? areaDeAtaque)
     {
         if (alvo.x < 0 || alvo.x > 8 || alvo.y < 0 || alvo.y > 5)
         {
@@ -40,7 +40,7 @@ public class ValidarHabilidade
             {
                 int dx = System.Math.Abs(alvo.x - origem.x);
                 int dy = System.Math.Abs(alvo.y - origem.y);
-
+                if (areaDeAtaque == null) return 200;
                 return (dx + dy) <= areaDeAtaque ? 200 : 400;
             }
             catch
@@ -55,7 +55,7 @@ public class ValidarHabilidade
     }
 
 
-    public int validarUsoHabilidade(Partida partida, Posicao origem, string dono, Habilidade habilidade, List<Alvo> alvos)
+    public int validarUsoHabilidade(Partida partida, Tabuleiro tabuleiro, Unidades unidade, string dono, Habilidade habilidade, List<Alvo> alvos)
     {
         if (habilidade.inimigoMaximo <= alvos.Count || habilidade.inimigoMaximo == null)
         {
@@ -64,9 +64,14 @@ public class ValidarHabilidade
             {
                 foreach (var alvo in alvos)
                 {
-                    if (validarDistancia(origem, alvo.posicao, null, habilidade.areaDeAtaque) != 200)
+
+                    if (validarDistancia(unidade.posicao, alvo.posicao, null, habilidade.areaDeAtaque) != 200)
                     {
                         return 401;
+                    }
+                    if (!tabuleiro.Grid[alvo.posicao.x, alvo.posicao.y].ocupante)
+                    {
+                        return 400;
                     }
                 }
                 return 200;
@@ -79,6 +84,73 @@ public class ValidarHabilidade
         else
         {
             return 400;
+        }
+    }
+
+    public int validarHabilidadePassiva(Habilidade habilidade, string dono, ContextoHabilidade ctx)
+    {
+        AplicarHabilidade aplicar = new();
+        if (ctx.alvoOriginal == null)
+        {
+            if (ctx.unidadeOriginal.habilidade.Any())
+            {
+                foreach (var idPassiva in ctx.unidadeOriginal.habilidade)
+                {
+                    var passiva = GameData.getHabilidade(idPassiva);
+                    if (passiva != null)
+                    {
+                        if (!passiva.ativo)
+                        {
+                            switch (passiva.gatilho)
+                            {
+                                case "": //ainda não definido
+                                    break;
+                                //especificações de passivas sem alvo
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                }
+                return 200;
+            }
+            else
+            {
+                return 400;
+            }
+        }
+        else
+        {
+            if (ctx.unidadeOriginal.habilidade.Any())
+            {
+                foreach (var idPassiva in ctx.unidadeOriginal.habilidade)
+                {
+                    var passiva = GameData.getHabilidade(idPassiva);
+                    if (passiva != null)
+                    {
+                        if (!passiva.ativo)
+                        {
+                            switch (passiva.gatilho)
+                            {
+                                case "receberDano":
+                                    if (ctx.alvoOriginal.hpAtual < ctx.alvoAlterado!.hpAtual)
+                                    {
+                                        aplicar.aplicarHabilidadePassiva(habilidade, dono, ctx, passiva);
+                                    }
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                }
+                return 200;
+            }
+            else
+            {
+                return 400;
+            }
         }
     }
 }

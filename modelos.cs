@@ -51,12 +51,13 @@ public class Habilidade
     public string codigo { get; set; } = string.Empty;
     public string nome { get; set; } = string.Empty;
     public string tescricao { get; set; } = string.Empty;
-    public string tipo { get; set; } = string.Empty;
+    public bool ativo { get; set; }
     public string tipoDeHabilidade { get; set; } = string.Empty;
     public int? inimigoMaximo { get; set; }
-    public int areaDeAtaque { get; set; }
-    public int duracao { get; set; }
-    public int coodown { get; set; }
+    public int? areaDeAtaque { get; set; }
+    public int? duracao { get; set; }
+    public int? coodown { get; set; }
+    public string? gatilho { get; set; }
 
     public Dictionary<string, object> efeito { get; set; } = new();
 }
@@ -121,6 +122,11 @@ public class Partida
     public List<LogPlayer> logPlayer2 { get; set; } = new();
     public List<Unidades> unidades { get; set; } = new();
     public List<Log> log { get; set; } = new();
+
+    public Unidades? getUnidadeById(string id)
+    {   
+        return unidades.FirstOrDefault(u => u.id == id);
+    }
 }
 
 public class StatusPlayer
@@ -142,9 +148,10 @@ public class Unidades
     public int hpMaximo { get; set; }
     public int hpAtual { get; set; }
     public int passos { get; set; }
+    public bool jaMoveu { get; set; }
     public bool jaAtacou { get; set; }
 
-    public string[]? habilidade { get; set; }
+    public string[] habilidade { get; set; } = Array.Empty<string>();
 }
 
 public class LogPlayer
@@ -160,8 +167,8 @@ public class LogPlayer
 
 public class Alvo
 {
-    public string cartaId { get; set; } = string.Empty;
-    public string cartaPlayer { get; set; } = string.Empty;
+    public string? id { get; set; } = string.Empty;
+    public string? cartaPlayer { get; set; } = string.Empty;
     public Posicao posicao { get; set; } = new();
 }
 
@@ -176,4 +183,37 @@ public class Log
     public int turno { get; set; }
     public List<int> player1 { get; set; } = new();
     public List<int> player2 { get; set; } = new();
+}
+
+
+public class ContextoHabilidade
+{
+    public Partida partida { get; set; } = new();
+
+    //unidade
+    public Unidades unidadeOriginal { get; set; } = new();
+    public Unidades unidadeAlterada { get; set; } = new();
+
+    //alvo
+    public Unidades? alvoOriginal { get; set; } = new();
+    public Unidades? alvoAlterado { get; set; } = new();
+
+    public Unidades cloneUnidade(Unidades original)
+{
+    return new Unidades
+    {
+        id = original.id,
+        dono = original.dono,
+        cartaId = original.cartaId,
+        posicao = new Posicao { x = original.posicao.x, y = original.posicao.y },
+        habilidade = original.habilidade != null ? (string[])original.habilidade.Clone() : Array.Empty<string>(),
+        dano = original.dano,
+        combate = original.combate,
+        hpMaximo = original.hpMaximo,
+        hpAtual = original.hpAtual,
+        passos = original.passos,
+        jaMoveu = original.jaMoveu,
+        jaAtacou = original.jaAtacou
+    };
+}
 }

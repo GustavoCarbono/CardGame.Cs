@@ -33,15 +33,15 @@ public class Movimentacao
 
 public class UsarHabilidade
 {
-    public int habilidade(Partida partida, string dono, string id, string habilidadeId, List<Alvo> alvos)
+    public int habilidade(Partida partida, Tabuleiro tabuleiro, string dono, string id, string habilidadeId, List<Alvo> alvos)
     {
 
         ValidarHabilidade validar = new();
         var unidade = partida.unidades.FirstOrDefault(u => u.id == id);
         var habilidade = GameData.getHabilidade(habilidadeId);
         if (unidade != null && habilidade != null)
-        {
-            if (validar.validarUsoHabilidade(partida, unidade.posicao, dono, habilidade, alvos) == 200 && unidade.jaAtacou == false)
+        {   //separar o jaAtacou
+            if (validar.validarUsoHabilidade(partida, tabuleiro, unidade, dono, habilidade, alvos) == 200 && unidade.jaAtacou == false)
             {
                 if (dono == "Chico Diabo")
                 {
@@ -69,50 +69,94 @@ public class AplicarHabilidade
     public int aplicarHabilidadeAtiva(Partida partida, Habilidade habilidade, Unidades unidade, string dono, List<Alvo> alvos)
     {
 
+        ValidarHabilidade validar = new();
         unidade.jaAtacou = true;
         var status = dono == partida.jogador1 ? partida.statusPlayer1 : partida.statusPlayer2;
         status.habilidadeRestante--;
 
+        ContextoHabilidade contexto = new();
+        contexto.partida = partida;
+        contexto.unidadeOriginal = unidade;
+        contexto.unidadeAlterada = contexto.cloneUnidade(unidade);
+        
         foreach (var alvo in alvos)
         {
-            var target = partida.unidades.FirstOrDefault(u => u.cartaId == alvo.cartaId && u.dono == alvo.cartaPlayer);
-            if (target != null)
+            var target = alvo.id != null ? partida.getUnidadeById(alvo.id) : null;
+
+            contexto.alvoOriginal = target;
+            contexto.alvoAlterado = target == null ? null : contexto.cloneUnidade(target);
+            switch (habilidade.tipoDeHabilidade)
             {
+                case "ataqueCorpoACorpo":
+                    if (contexto.alvoAlterado == null) return 404;
+                    bool custaHp = Convert.ToBoolean(getEfeito(habilidade, "custaHp"));
+                    if (custaHp)
+                    {
+                        contexto.unidadeAlterada.hpAtual -= 2;
+                        contexto.alvoAlterado.hpAtual -= unidade.dano;
+                        validar.validarHabilidadePassiva(habilidade, dono, contexto);
+                    }
+                    else
+                    {
+                        contexto.alvoAlterado.hpAtual -= unidade.dano;
+                        validar.validarHabilidadePassiva(habilidade, dono, contexto);
+                    }
+                    break;
+                case "feixeMagia":
 
-                switch (habilidade.tipoDeHabilidade)
-                {
-                    case "ataqueCorpoACorpo":
-                        bool custaHp = Convert.ToBoolean(getEfeito(habilidade, "custaHp"));
-                        break;
-                    case "feixeMagia":
+                    break;
+                case "invocacaoFraca":
 
-                        break;
-                    case "invocacaoFraca":
+                    break;
+                case "tiro":
 
-                        break;
-                    case "tiro":
+                    break;
+                case "debuffRInimigo":
 
-                        break;
-                    case "debuffRInimigo":
-
-                        break;
-                    default:
-                        return 404;
-                }
-
-
-            }
-            else
-            {
-                return 404;
+                    break;
+                default:
+                    return 404;
             }
         }
         return 200;
     }
 
+    public int aplicarHabilidadePassiva(Habilidade ativa, string dono, ContextoHabilidade ctx, Habilidade passiva)
+    {
+        if (ctx.alvoAlterado != null && ctx.alvoOriginal != null)
+        {
+            switch (passiva.tipoDeHabilidade)
+            {
+                case "refletirDano":
+                    Random rand = new();
+                    double chance = Convert.ToDouble(getEfeito(passiva, "porcentagem"));
+                    double porcRefletida = Convert.ToDouble(getEfeito(passiva, "porcentagemDano"));
+                    if (rand.Next(1, 101) <= (chance * 100))
+                    {
+                        ctx.alvoOriginal.hpAtual -= (int)((ctx.alvoOriginal.hpAtual - ctx.alvoAlterado.hpAtual) * porcRefletida);
+                    }
+                    break;
+                default:
+                    return 400;
+            }
+            return 200;
+        }
+        else
+        {
+            switch (passiva.tipoDeHabilidade)
+            {
+                case "":
+                    break;
+                default:
+                    return 400;
+            }
+            return 200;
+        }
+    }
+
     public object getEfeito(Habilidade habilidade, string Chave)
     {
-        if (habilidade.efeito.TryGetValue("custaHp", out object? valor) && valor != null)
+        if (habilidade.efeito.TryGetValue(Chave, out object? valor) && valor != null)
         {
             return valor;
         }
@@ -120,6 +164,6 @@ public class AplicarHabilidade
         {
             Console.WriteLine("Não foi possivo pegar valor");
             return new object();
-        }        
+        }
     }
 }

@@ -51,7 +51,7 @@
             "codigo": "0x01",
             "nome": "Golpe Poderoso",
             "descricao": "Aumenta o dano do próximo ataque em 50% tirando 2 de hp.",
-            "tipo": "Ativo",
+            "ativo": true,
             "tipoDeHabilidade": "ataqueCorpoACorpo",
             "inimigoMaximo": 4,
             "areaDeAtaque": 1,
@@ -64,16 +64,16 @@
         },
         {
             "codigo": "0x02",
-            "nome": "lança chamas",
-            "descricao": "Faz um rasto de fogo que causa 3 de dano por 2 turnos.",
-            "tipo": "Ativo",
+            "nome": "paredes infernais",
+            "descricao": "Faz parede de fogo que causa 3 de dano por 2 turnos.",
+            "ativo": true,
             "tipoDeHabilidade": "feixeMagia",
-            "inimigoMaximo": null,
+            "inimigoMaximo": 3,
             "areaDeAtaque": 4,
             "duração": 2,
             "coodown": 3,
             "efeito": {
-                "qtdeDano": 1,
+                "qtdeDano": 3,
                 "tipoDano": "fogo"
             }
         },
@@ -81,7 +81,7 @@
             "codigo": "0x03",
             "nome": "Invocador de cultista",
             "descricao": "Invoca um cultista que ataca inimigos próximos.",
-            "tipo": "Ativo",
+            "ativo": true,
             "tipoDeHabilidade": "InvocacaoFraca",
             "areaDeAtaque": 2,
             "duração": 2,
@@ -89,14 +89,14 @@
             "efeito": {
                 "statusInvocado": 0.5,
                 "personagemInvocavel": ["0x05"],
-                "qtdeInvocado": 1
+                "qtdeInvocacao": 1
             }
         },
         {
             "codigo": "0x04",
             "nome": "Tiro Rapido",
             "descricao": "Atira em dois inimigos em qualquer lugar do campo causando 50% de dano.",
-            "tipo": "Ativo",
+            "ativo": true,
             "tipoDeHabilidade": "tiro",
             "inimigoMaximo": 2,
             "areaDeAtaque": 11,
@@ -110,7 +110,7 @@
             "codigo": "0x05",
             "nome": "Maldicao do Culto",
             "descricao": "Deixa o inimigo enfraquecido, reduzindo a vida em 10% por 3 turnos.",
-            "tipo": "Ativo",
+            "ativo": true,
             "tipoDeHabilidade": "DebuffRInimigo",
             "inimigoMaximo": 1,
             "areaDeAtaque": 11,
@@ -119,6 +119,18 @@
             "efeito": {
                 "debuff": "hp",
                 "qtdeDebuff": 0.1
+            }
+        },
+        {
+            "codigo": "0x05",
+            "nome": "Corpo de aço",
+            "descricao": "50% de refletir 50% do dano",
+            "ativo": false,
+            "tipoDeHabilidade": "refletirDano",
+            "gatilho": "receberDano",
+            "efeito": {
+                "porcentagem": 0.5,
+                "porcentagemDano": 0.5
             }
         }
     ],

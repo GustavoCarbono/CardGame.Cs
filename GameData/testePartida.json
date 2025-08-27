@@ -105,9 +105,10 @@
             "tipo": "habilidade",
             "cartaId": "0x02",
             "habilidadeId": "0x01",
+            "type": "ativo",
             "alvo": [
                 {
-                    "cartaId": "0x03",
+                    "id": 3,
                     "cartaPlayer": "player1",
                     "posicao": {
                         "x": 2,
