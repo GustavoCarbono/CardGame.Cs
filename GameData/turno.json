@@ -1,0 +1,34 @@
+{
+    "tipo": "turno",
+    "jogador": "player1",
+    "acoes": [
+        {
+            "tipo": "mover",
+            "cartaId": "0x01",
+            "de": {
+                "x": 3,
+                "y": 4
+            },
+            "para": {
+                "x": 4,
+                "y": 4
+            }
+        },
+        {
+            "tipo": "habilidade",
+            "cartaId": "0x02",
+            "habilidadeId": "0x01",
+            "type": "ativo",
+            "alvo": [
+                {
+                    "id": 3,
+                    "cartaPlayer": "player1",
+                    "posicao": {
+                        "x": 2,
+                        "y": 3
+                    }
+                }
+            ]
+        }
+    ]
+}

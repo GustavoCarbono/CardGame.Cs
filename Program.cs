@@ -1,15 +1,14 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
 
 var app = builder.Build();
 
 
-app.UseStaticFiles();
-app.MapRazorPages();
-
-// adiciona a rota do hub
-app.MapHub<GameHub>("/gameHub");
+app.MapHub<GameHub>("/gamehub");
 
 app.Run();

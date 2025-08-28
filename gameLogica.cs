@@ -1,23 +1,59 @@
 public class Movimentacao
 {
 
-    public int movimento(Partida partida, Tabuleiro tabuleiro, string id, string dono, Posicao novaPosicao)
+    public int movimento(Partida partida, Tabuleiro tabuleiro, int id, string dono, Posicao novaPosicao)
     {
 
         ValidarMovimento validar = new();
+        ValidarHabilidade validarHabilidade = new();
+        ContextoHabilidade contexto = new();
+        contexto.partida = partida;
 
-        var unidade = partida.unidades.FirstOrDefault(u => u.id == id);
+        var unidade = partida.getUnidadeById(id);
         if (unidade != null)
         {
-            //verificar se ele já moveu, colocar que moveu e logar no partida.log
-            if (validar.validarMovimentoUnidade(unidade, tabuleiro, novaPosicao, partida, dono, unidade.passos) == 200)
+            contexto.unidadeOriginal = unidade;
+            contexto.unidadeAlterada = contexto.cloneUnidade(unidade);
+            //logar no partida.log
+            if (validar.validarMovimentoUnidade(unidade, tabuleiro, novaPosicao, partida, dono) == 200)
             {
-                unidade.posicao = novaPosicao;
-                var movimento = dono == "jogador1" ? partida.statusPlayer1 : partida.statusPlayer2;
-                movimento.movRestante--;
-                tabuleiro.Grid[novaPosicao.x, novaPosicao.y].ocupante = true;
-                tabuleiro.Grid[novaPosicao.x, novaPosicao.y].idOcupante = id;
-                return 200;
+                if (unidade.jaMoveu == false)
+                {
+                    if (tabuleiro.Grid[novaPosicao.x, novaPosicao.y].obstaculo)
+                    {
+                        var obstaculo = partida.getUnidadeById(tabuleiro.Grid[novaPosicao.x, novaPosicao.y].idObstaculo ?? 0);
+                        if (obstaculo != null && !(obstaculo.hitbox ?? false))
+                        {
+                            unidade.posicao = novaPosicao;
+                            var movimento = dono == "jogador1" ? partida.statusPlayer1 : partida.statusPlayer2;
+                            movimento.movRestante--;
+                            unidade.jaMoveu = true;
+                            contexto.unidadeAlterada.hpAtual -= obstaculo.dano;
+                            validarHabilidade.validarHabilidadePassiva(null, dono, contexto, null);
+                            tabuleiro.Grid[novaPosicao.x, novaPosicao.y].ocupante = true;
+                            tabuleiro.Grid[novaPosicao.x, novaPosicao.y].idOcupante = id;
+                            return 200;
+                        }
+                        else
+                        {
+                            return 400;
+                        }
+                    }
+                    else
+                    {
+                        unidade.posicao = novaPosicao;
+                        var movimento = dono == "jogador1" ? partida.statusPlayer1 : partida.statusPlayer2;
+                        movimento.movRestante--;
+                        unidade.jaMoveu = true;
+                        tabuleiro.Grid[novaPosicao.x, novaPosicao.y].ocupante = true;
+                        tabuleiro.Grid[novaPosicao.x, novaPosicao.y].idOcupante = id;
+                        return 200;
+                    }
+                }
+                else
+                {
+                    return 400;
+                }
             }
             else
             {
@@ -33,17 +69,18 @@ public class Movimentacao
 
 public class UsarHabilidade
 {
-    public int habilidade(Partida partida, Tabuleiro tabuleiro, string dono, string id, string habilidadeId, List<Alvo> alvos)
+    public int habilidade(Partida partida, Tabuleiro tabuleiro, string dono, int id, string habilidadeId, List<Alvo> alvos)
     {
 
         ValidarHabilidade validar = new();
-        var unidade = partida.unidades.FirstOrDefault(u => u.id == id);
+        AplicarHabilidade aplicar = new();
+        var unidade = partida.getUnidadeById(id);
         var habilidade = GameData.getHabilidade(habilidadeId);
         if (unidade != null && habilidade != null)
         {   //separar o jaAtacou
             if (validar.validarUsoHabilidade(partida, tabuleiro, unidade, dono, habilidade, alvos) == 200 && unidade.jaAtacou == false)
             {
-                if (dono == "Chico Diabo")
+                if (aplicar.aplicarHabilidadeAtiva(partida, habilidade, unidade, dono, alvos) == 200)
                 {
                     return 200;
                 }
@@ -78,10 +115,9 @@ public class AplicarHabilidade
         contexto.partida = partida;
         contexto.unidadeOriginal = unidade;
         contexto.unidadeAlterada = contexto.cloneUnidade(unidade);
-        
         foreach (var alvo in alvos)
         {
-            var target = alvo.id != null ? partida.getUnidadeById(alvo.id) : null;
+            var target = alvo.id.HasValue ? partida.getUnidadeById(alvo.id.Value) : null;
 
             contexto.alvoOriginal = target;
             contexto.alvoAlterado = target == null ? null : contexto.cloneUnidade(target);
@@ -94,16 +130,30 @@ public class AplicarHabilidade
                     {
                         contexto.unidadeAlterada.hpAtual -= 2;
                         contexto.alvoAlterado.hpAtual -= unidade.dano;
-                        validar.validarHabilidadePassiva(habilidade, dono, contexto);
+                        validar.validarHabilidadePassiva(habilidade, dono, contexto, null);
                     }
                     else
                     {
                         contexto.alvoAlterado.hpAtual -= unidade.dano;
-                        validar.validarHabilidadePassiva(habilidade, dono, contexto);
+                        validar.validarHabilidadePassiva(habilidade, dono, contexto, null);
                     }
                     break;
                 case "feixeMagia":
-
+                    var obstaculo = GameData.getObstaculo("0x01");
+                    if (obstaculo != null)
+                    {
+                        partida.unidades.Add(new Unidades
+                        {
+                            id = Guid.NewGuid().GetHashCode(),
+                            dono = dono,
+                            obstaculoId = "0x01",
+                            posicao = alvo.posicao,
+                            duracao = obstaculo.duracao,
+                            dano = obstaculo.dano,
+                            hitbox = obstaculo.hitbox,
+                            efeito = obstaculo.tipo
+                        });
+                    }
                     break;
                 case "invocacaoFraca":
 
@@ -131,7 +181,8 @@ public class AplicarHabilidade
                     Random rand = new();
                     double chance = Convert.ToDouble(getEfeito(passiva, "porcentagem"));
                     double porcRefletida = Convert.ToDouble(getEfeito(passiva, "porcentagemDano"));
-                    if (rand.Next(1, 101) <= (chance * 100))
+                    if (rand.NextDouble() <= chance && ctx.alvoOriginal.hpAtual != null &&
+                        ctx.alvoAlterado.hpAtual != null)
                     {
                         ctx.alvoOriginal.hpAtual -= (int)((ctx.alvoOriginal.hpAtual - ctx.alvoAlterado.hpAtual) * porcRefletida);
                     }

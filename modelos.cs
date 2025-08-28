@@ -91,7 +91,9 @@ public class Celula
     public int X { get; set; }
     public int Y { get; set; }
     public bool ocupante { get; set; }
-    public string? idOcupante { get; set; }
+    public int? idOcupante { get; set; }
+    public bool obstaculo { get; set; }
+    public int? idObstaculo { get; set; }
 }
 
 public class Tabuleiro
@@ -116,15 +118,17 @@ public class Partida
     public string jogador1 { get; set; } = string.Empty;
     public string jogador2 { get; set; } = string.Empty;
     public int turnoAtual { get; set; }
+    public string jogadorTurno => turnoAtual % 2 != 0 ? jogador1 : jogador2;
     public StatusPlayer statusPlayer1 { get; set; } = new();
     public StatusPlayer statusPlayer2 { get; set; } = new();
     public List<LogPlayer> logPlayer1 { get; set; } = new();
     public List<LogPlayer> logPlayer2 { get; set; } = new();
     public List<Unidades> unidades { get; set; } = new();
     public List<Log> log { get; set; } = new();
+    public Tabuleiro tabuleiro { get; set; } = new();
 
-    public Unidades? getUnidadeById(string id)
-    {   
+    public Unidades? getUnidadeById(int id)
+    {
         return unidades.FirstOrDefault(u => u.id == id);
     }
 }
@@ -135,21 +139,33 @@ public class StatusPlayer
     public int movRestante { get; set; }
     public int totalUsoHabilidade { get; set; }
     public int habilidadeRestante { get; set; }
+
+    public StatusPlayer()
+    {
+        movTotal = 3;
+        movRestante = 3;
+        totalUsoHabilidade = 2;
+        habilidadeRestante = 2;
+    }
 }
 
 public class Unidades
 {
-    public string id { get; set; } = Guid.NewGuid().ToString();
+    public int id { get; set; } = Guid.NewGuid().GetHashCode();
     public string dono { get; set; } = string.Empty;
-    public string cartaId { get; set; } = string.Empty;
+    public string? cartaId { get; set; } = string.Empty;
+    public string? obstaculoId { get; set; } = string.Empty;
     public Posicao posicao { get; set; } = new();
     public int dano { get; set; }
-    public int combate { get; set; }
-    public int hpMaximo { get; set; }
-    public int hpAtual { get; set; }
-    public int passos { get; set; }
-    public bool jaMoveu { get; set; }
-    public bool jaAtacou { get; set; }
+    public int? combate { get; set; }
+    public int? hpMaximo { get; set; }
+    public int? hpAtual { get; set; }
+    public int? passos { get; set; }
+    public int? duracao { get; set; }
+    public bool? hitbox { get; set; }
+    public string? efeito { get; set; }
+    public bool? jaMoveu { get; set; }
+    public bool? jaAtacou { get; set; }
 
     public string[] habilidade { get; set; } = Array.Empty<string>();
 }
@@ -167,7 +183,7 @@ public class LogPlayer
 
 public class Alvo
 {
-    public string? id { get; set; } = string.Empty;
+    public int? id { get; set; }
     public string? cartaPlayer { get; set; } = string.Empty;
     public Posicao posicao { get; set; } = new();
 }
@@ -199,21 +215,50 @@ public class ContextoHabilidade
     public Unidades? alvoAlterado { get; set; } = new();
 
     public Unidades cloneUnidade(Unidades original)
-{
-    return new Unidades
     {
-        id = original.id,
-        dono = original.dono,
-        cartaId = original.cartaId,
-        posicao = new Posicao { x = original.posicao.x, y = original.posicao.y },
-        habilidade = original.habilidade != null ? (string[])original.habilidade.Clone() : Array.Empty<string>(),
-        dano = original.dano,
-        combate = original.combate,
-        hpMaximo = original.hpMaximo,
-        hpAtual = original.hpAtual,
-        passos = original.passos,
-        jaMoveu = original.jaMoveu,
-        jaAtacou = original.jaAtacou
-    };
+        return new Unidades
+        {
+            id = original.id,
+            dono = original.dono,
+            cartaId = original.cartaId,
+            posicao = new Posicao { x = original.posicao.x, y = original.posicao.y },
+            habilidade = original.habilidade != null ? (string[])original.habilidade.Clone() : Array.Empty<string>(),
+            dano = original.dano,
+            combate = original.combate,
+            hpMaximo = original.hpMaximo,
+            hpAtual = original.hpAtual,
+            passos = original.passos,
+            jaMoveu = original.jaMoveu,
+            jaAtacou = original.jaAtacou
+        };
+    }
 }
+
+//Turno do jogador
+public class Turno
+{
+    public string tipo { get; set; } = string.Empty;
+    public string jogador { get; set; } = string.Empty;
+    public List<Acao> acoes { get; set; } = new();
+}
+
+public class Acao
+{
+    public string tipo { get; set; } = string.Empty; // "mover" ou "habilidade"
+    public string cartaId { get; set; } = string.Empty;
+
+    // Campos para movimento
+    public Posicao? de { get; set; }
+    public Posicao? para { get; set; }
+
+    // Campos para habilidade
+    public string? habilidadeId { get; set; }
+    public List<Alvo>? alvo { get; set; }
+}
+
+public class CriarPartidaJson
+{
+    public string jogador1 { get; set; } = string.Empty;
+    public string jogador2 { get; set; } = string.Empty;
+    public List<Unidades> unidades { get; set; } = new();
 }

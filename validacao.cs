@@ -1,12 +1,13 @@
+
 public class ValidarMovimento
 {
-    public int validarMovimentoUnidade(Unidades unidade, Tabuleiro tabuleiro, Posicao novaPosicao, Partida partida, string dono, int passos)
+    public int validarMovimentoUnidade(Unidades unidade, Tabuleiro tabuleiro, Posicao novaPosicao, Partida partida, string dono)
     {
-        if (novaPosicao.x < 0 || novaPosicao.x > 8 || novaPosicao.y < 0 || novaPosicao.y > 5)
+        if (novaPosicao.x >= 0 && novaPosicao.x < 8 && novaPosicao.y >= 0 && novaPosicao.y < 5)
         {
             int distancia = System.Math.Abs(novaPosicao.x - unidade.posicao.x) + System.Math.Abs(novaPosicao.y - unidade.posicao.y);
 
-            if (distancia <= passos && (dono == partida.jogador1 ? partida.statusPlayer1 : partida.statusPlayer2)
+            if (distancia <= unidade.passos && (dono == partida.jogador1 ? partida.statusPlayer1 : partida.statusPlayer2)
                 .movRestante >= 1)
             {
                 if (!tabuleiro.Grid[novaPosicao.x, novaPosicao.y].ocupante)
@@ -34,7 +35,7 @@ public class ValidarHabilidade
 {
     public int validarDistancia(Posicao origem, Posicao alvo, string? tipoDistancia, int? areaDeAtaque)
     {
-        if (alvo.x < 0 || alvo.x > 8 || alvo.y < 0 || alvo.y > 5)
+        if (alvo.x >= 0 && alvo.x < 8 && alvo.y >= 0 && alvo.y < 5)
         {
             try
             {
@@ -87,36 +88,74 @@ public class ValidarHabilidade
         }
     }
 
-    public int validarHabilidadePassiva(Habilidade habilidade, string dono, ContextoHabilidade ctx)
+    public int validarHabilidadePassiva(Habilidade? habilidade, string dono, ContextoHabilidade ctx, Obstaculo? obstaculo)
     {
         AplicarHabilidade aplicar = new();
-        if (ctx.alvoOriginal == null)
+        if (habilidade != null)
         {
-            if (ctx.unidadeOriginal.habilidade.Any())
+
+
+            if (ctx.alvoOriginal == null)
             {
-                foreach (var idPassiva in ctx.unidadeOriginal.habilidade)
+                if (ctx.unidadeOriginal.habilidade.Any())
                 {
-                    var passiva = GameData.getHabilidade(idPassiva);
-                    if (passiva != null)
+                    foreach (var idPassiva in ctx.unidadeOriginal.habilidade)
                     {
-                        if (!passiva.ativo)
+                        var passiva = GameData.getHabilidade(idPassiva);
+                        if (passiva != null)
                         {
-                            switch (passiva.gatilho)
+                            if (!passiva.ativo)
                             {
-                                case "": //ainda não definido
-                                    break;
-                                //especificações de passivas sem alvo
-                                default:
-                                    break;
+                                switch (passiva.gatilho)
+                                {
+                                    case "": //ainda não definido
+                                        break;
+                                    //especificações de passivas sem alvo
+                                    default:
+                                        break;
+                                }
                             }
                         }
                     }
+                    return 200;
                 }
-                return 200;
+                else
+                {
+                    return 400;
+                }
             }
             else
             {
-                return 400;
+                if (ctx.unidadeOriginal.habilidade.Any())
+                {
+                    foreach (var idPassiva in ctx.unidadeOriginal.habilidade)
+                    {
+                        var passiva = GameData.getHabilidade(idPassiva);
+                        if (passiva != null)
+                        {
+                            if (!passiva.ativo)
+                            {
+                                switch (passiva.gatilho)
+                                {
+                                    case "receberDano":
+                                        if (ctx.alvoOriginal.hpAtual < ctx.alvoAlterado!.hpAtual)
+                                        {
+                                            aplicar.aplicarHabilidadePassiva(habilidade, dono, ctx, passiva);
+                                        }
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                    return 200;
+                }
+                else
+                {
+                    return 400;
+                }
             }
         }
         else
@@ -128,20 +167,13 @@ public class ValidarHabilidade
                     var passiva = GameData.getHabilidade(idPassiva);
                     if (passiva != null)
                     {
-                        if (!passiva.ativo)
+                        switch (passiva.gatilho)
                         {
-                            switch (passiva.gatilho)
-                            {
-                                case "receberDano":
-                                    if (ctx.alvoOriginal.hpAtual < ctx.alvoAlterado!.hpAtual)
-                                    {
-                                        aplicar.aplicarHabilidadePassiva(habilidade, dono, ctx, passiva);
-                                    }
-                                    break;
-
-                                default:
-                                    break;
-                            }
+                            case "": //ainda não definido
+                                break;
+                            //passiva de obstáculo
+                            default:
+                                break;
                         }
                     }
                 }
