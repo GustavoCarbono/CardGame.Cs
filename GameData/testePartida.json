@@ -16,7 +16,7 @@
     },
     "unidades": [
         {
-            "id": "0x01",
+            "id": 1,
             "dono": "jogador1",
             "cartaId": "0x01",
             "posicao": {
@@ -33,7 +33,7 @@
             "jaMoveu": false
         },
         {
-            "id": "0x02",
+            "id": 2,
             "dono": "jogador1",
             "cartaId": "0x03",
             "posicao": {
@@ -50,7 +50,7 @@
             "jaMoveu": false
         },
         {
-            "id": "0x03",
+            "id": 3,
             "dono": "jogador2",
             "cartaId": "0x02",
             "posicao": {
@@ -67,7 +67,7 @@
             "jaMoveu": false
         },
         {
-            "id": "0x04",
+            "id": 4,
             "dono": "jogador2",
             "cartaId": "0x04",
             "posicao": {
@@ -82,6 +82,19 @@
             "gastoMov": 1,
             "jaAtacou": false,
             "jaMoveu": false
+        },
+        {
+            "id": 5,
+            "dono": "player1",
+            "obstaculoId": "0x01",
+            "posicao": {
+                "x": 5,
+                "y": 5
+            },
+            "duração": 2,
+            "dano": 1,
+            "hitbox": false,
+            "efeito": "fogo"
         }
     ],
     "logPlayer1": [
