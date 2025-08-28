@@ -92,6 +92,8 @@ public class Celula
     public int Y { get; set; }
     public bool ocupante { get; set; }
     public string? idOcupante { get; set; }
+    public bool obstaculo { get; set; }
+    public string? idObstaculo { get; set; }
 }
 
 public class Tabuleiro
@@ -139,17 +141,21 @@ public class StatusPlayer
 
 public class Unidades
 {
-    public string id { get; set; } = Guid.NewGuid().ToString();
+    public int id { get; set; } = Guid.NewGuid().GetHashCode();
     public string dono { get; set; } = string.Empty;
-    public string cartaId { get; set; } = string.Empty;
+    public string? cartaId { get; set; } = string.Empty;
+    public string? obstaculoId { get; set; } = string.Empty;
     public Posicao posicao { get; set; } = new();
     public int dano { get; set; }
-    public int combate { get; set; }
-    public int hpMaximo { get; set; }
-    public int hpAtual { get; set; }
-    public int passos { get; set; }
-    public bool jaMoveu { get; set; }
-    public bool jaAtacou { get; set; }
+    public int? combate { get; set; }
+    public int? hpMaximo { get; set; }
+    public int? hpAtual { get; set; }
+    public int? passos { get; set; }
+    public int? duracao { get; set; }
+    public bool? hitbox { get; set; }
+    public bool? efeito { get; set; }
+    public bool? jaMoveu { get; set; }
+    public bool? jaAtacou { get; set; }
 
     public string[] habilidade { get; set; } = Array.Empty<string>();
 }
