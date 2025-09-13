@@ -1,0 +1,28 @@
+#log{
+    height: 80%;
+    width: 37%;
+    left: 59%;
+    top: 20%;
+    display: none;
+    padding-top: 0.5%;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    border-top-left-radius: 20px;
+    background-color: rgba(130, 130, 130, 0.85);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+
+#checkbox-log:checked ~ section #log{
+    display:flex
+}
+
+#checkbox-log:checked ~ section #log-label{
+    background-color: #b9b9b9;
+}
+
+#checkbox-log:checked ~ section #log-icon{
+    color:black;
+}

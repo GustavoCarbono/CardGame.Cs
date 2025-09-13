@@ -1,0 +1,146 @@
+{
+    "jogador1": "player1",
+    "jogador2": "player2",
+    "turnoAtual": 1,
+    "statusP1": {
+        "movTotal": 3,
+        "movRestante": 3,
+        "totalUsoHabilidade": 2,
+        "habilidadeRestante": 2
+    },
+    "statusP2": {
+        "movTotal": 3,
+        "movRestante": 3,
+        "totalUsoHabilidade": 2,
+        "habilidadeRestante": 2
+    },
+    "unidades": [
+        {
+            "id": 1,
+            "dono": "jogador1",
+            "cartaId": "0x01",
+            "posicao": {
+                "x": 3,
+                "y": 4
+            },
+            "habilidade" : ["0x01"],
+            "dano": 15,
+            "combate": 10,
+            "hpMaximo": 40,
+            "hpAtual": 40,
+            "gastoMov": 1,
+            "jaAtacou": false,
+            "jaMoveu": false
+        },
+        {
+            "id": 2,
+            "dono": "jogador1",
+            "cartaId": "0x03",
+            "posicao": {
+                "x": 2,
+                "y": 3
+            },
+            "habilidade" : ["0x03"],
+            "dano": 1,
+            "combate": 2,
+            "hpMaximo": 15,
+            "hpAtual": 15,
+            "gastoMov": 1,
+            "jaAtacou": false,
+            "jaMoveu": false
+        },
+        {
+            "id": 3,
+            "dono": "jogador2",
+            "cartaId": "0x02",
+            "posicao": {
+                "x": 8,
+                "y": 4
+            },
+            "habilidade" : ["0x02"],
+            "dano": 10,
+            "combate": 5,
+            "hpMaximo": 40,
+            "hpAtual": 40,
+            "gastoMov": 1,
+            "jaAtacou": false,
+            "jaMoveu": false
+        },
+        {
+            "id": 4,
+            "dono": "jogador2",
+            "cartaId": "0x04",
+            "posicao": {
+                "x": 7,
+                "y": 3
+            },
+            "habilidade" : ["0x04"],
+            "dano": 2,
+            "combate": 5,
+            "hpMaximo": 15,
+            "hpAtual": 15,
+            "gastoMov": 1,
+            "jaAtacou": false,
+            "jaMoveu": false
+        },
+        {
+            "id": 5,
+            "dono": "player1",
+            "obstaculoId": "0x01",
+            "posicao": {
+                "x": 5,
+                "y": 5
+            },
+            "duração": 2,
+            "dano": 1,
+            "hitbox": false,
+            "efeito": "fogo"
+        }
+    ],
+    "logPlayer1": [
+        {
+            "logId": 1,
+            "tipo": "mover",
+            "cartaId": "0x01",
+            "de": {
+                "x": 3,
+                "y": 4
+            },
+            "para": {
+                "x": 4,
+                "y": 4
+            }
+        }
+    ],
+    "logPlayer2": [
+        {
+            "logId": 1,
+            "tipo": "habilidade",
+            "cartaId": "0x02",
+            "habilidadeId": "0x01",
+            "type": "ativo",
+            "alvo": [
+                {
+                    "id": 3,
+                    "cartaPlayer": "player1",
+                    "posicao": {
+                        "x": 2,
+                        "y": 3
+                    }
+                }
+            ]
+        }
+    ],
+    "log": [
+        {
+            "turno": 1,
+            "player1": [1, 2],
+            "player2": [1, 2]
+        },
+        {
+            "turno": 2,
+            "player1": [3, 4, 5],
+            "player2": [3, 4]
+        }
+    ]
+}

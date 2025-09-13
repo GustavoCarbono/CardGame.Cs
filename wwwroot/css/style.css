@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+section{
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.canvas{
+    height: 100%;
+    width: 96%;
+    background-image: url("../img/grama.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+canvas{
+    position:absolute;
+    left:0;
+    top:0;
+}
+
+div{
+    align-items: center;
+}

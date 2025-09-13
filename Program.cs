@@ -9,6 +9,7 @@ builder.Services.AddSignalR();
 var app = builder.Build();
 
 
-app.MapHub<GameHub>("/gamehub");
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 app.Run();

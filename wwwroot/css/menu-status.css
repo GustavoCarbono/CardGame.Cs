@@ -1,0 +1,78 @@
+#status{
+    height: 80%;
+    width: 37%;
+    left: 59%;
+    top: 20%;
+    display: none;
+    padding-top: 0.5%;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    border-top-left-radius: 20px;
+    background-color: #cddfded9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.status-scroll{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.info-jogador{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 12%;
+}
+
+.personagem-info-toggle{
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    margin-top: 14px;
+    background-color: white;
+}
+
+.personagem-header{
+    width: 100%;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.personagem-header i{
+    color:black;
+    font-size: 30px;
+}
+
+.arrow{
+    transition: transform 0.3s ease;
+}
+
+.personagem-descricao{
+    width: 90%;
+    overflow: hidden;
+    height: 0;
+    transition: height 0.3s ease;
+}
+
+.p-descricao{
+    width: 90%;
+    margin-bottom: 18px;
+}
+
+#checkbox-status:checked ~ section #status{
+    display:flex
+}
+
+#checkbox-status:checked ~ section #status-label{
+    background-color: #b9b9b9;
+}
+
+#checkbox-status:checked ~ section #status-icon{
+    color:black;
+}

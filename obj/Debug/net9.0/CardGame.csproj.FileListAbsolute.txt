@@ -24,10 +24,6 @@ C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\rjsmcsht
 C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\scopedcss\bundle\CardGame.styles.css
 C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\scopedcss\projectbundle\CardGame.bundle.scp.css
-C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\compressed\87s90kotpf-b9sayid5wm.gz
-C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\compressed\jjwf4ghb4f-61n19gt1b8.gz
-C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\compressed\gnrzyqgk01-tezloumhr8.gz
-C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\compressed\cxcyigmzi7-xtxxf3hu2r.gz
 C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\compressed\i49f90fa3j-bqjiyaj88i.gz
 C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\compressed\hxv74km147-c2jlpeoesf.gz
 C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\compressed\alin2axmur-erw9l3u2r3.gz
@@ -100,3 +96,13 @@ C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\CardGame
 C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\CardGame.genruntimeconfig.cache
 C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\ref\CardGame.dll
 C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\bin\Debug\net9.0\GameData\gameData.json
+C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\bin\Debug\net9.0\GameData\testePartida.json
+C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\bin\Debug\net9.0\GameData\turno.json
+C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\bin\Debug\net9.0\package-lock.json
+C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\bin\Debug\net9.0\package.json
+C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\CardGame.sourcelink.json
+C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\compressed\w2pz52ftdd-bpi584i6cs.gz
+C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\compressed\4xd50q9w9n-3r8b2a0bt1.gz
+C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\compressed\ebo1ial2n5-j8cdv0vvyl.gz
+C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\compressed\7eixwdmqil-3gk83a3pkd.gz
+C:\Users\Gustavo\Desktop\projetos\JogoDeCarta\CardGame\obj\Debug\net9.0\compressed\gnrzyqgk01-j186ti76vd.gz
