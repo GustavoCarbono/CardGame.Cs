@@ -142,10 +142,6 @@ C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\58w
 C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\v44d30nui7-s1m61a870j.gz
 C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\4vt471rf7g-ut4lna5u7u.gz
 C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\aomu31j658-qs4u3kldfk.gz
-C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\7eixwdmqil-bexipwc2qg.gz
-C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\gnrzyqgk01-1v8x3st4bz.gz
-C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\ebo1ial2n5-9mmfn7h3pb.gz
-C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\4xd50q9w9n-suhfpoogot.gz
 C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\9lhg446rbn-5ipweew5fc.gz
 C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\i49f90fa3j-t1cqhe9u97.gz
 C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\hxv74km147-c2jlpeoesf.gz
@@ -219,3 +215,8 @@ C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\refint\CardGam
 C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\CardGame.pdb
 C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\CardGame.genruntimeconfig.cache
 C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\ref\CardGame.dll
+C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\7eixwdmqil-mmnreuvm7e.gz
+C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\gnrzyqgk01-u2rh2u6shh.gz
+C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\ebo1ial2n5-lw6ewq1ll6.gz
+C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\ze1kxmm6ri-kch222ab7p.gz
+C:\Users\Gustavo\Desktop\Projetos\C#\CardGame.Cs\obj\Debug\net9.0\compressed\4xd50q9w9n-wt6gh3eup7.gz

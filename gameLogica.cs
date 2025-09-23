@@ -29,7 +29,7 @@ public class Movimentacao
                             movimento.movRestante--;
                             unidade.jaMoveu = true;
                             contexto.unidadeAlterada.hpAtual -= obstaculo.dano;
-                            validarHabilidade.validarHabilidadePassiva(null, dono, contexto, null);
+                            validarHabilidade.validarHabilidadePassiva(null, dono, contexto);
                             tabuleiro.Grid[novaPosicao.x, novaPosicao.y].ocupante = true;
                             tabuleiro.Grid[novaPosicao.x, novaPosicao.y].idOcupante = id;
                             return 200;
@@ -130,30 +130,16 @@ public class AplicarHabilidade
                     {
                         contexto.unidadeAlterada.hpAtual -= 2;
                         contexto.alvoAlterado.hpAtual -= unidade.dano;
-                        validar.validarHabilidadePassiva(habilidade, dono, contexto, null);
+                        validar.validarHabilidadePassiva(habilidade, dono, contexto);
                     }
                     else
                     {
                         contexto.alvoAlterado.hpAtual -= unidade.dano;
-                        validar.validarHabilidadePassiva(habilidade, dono, contexto, null);
+                        validar.validarHabilidadePassiva(habilidade, dono, contexto);
                     }
                     break;
                 case "feixeMagia":
-                    var obstaculo = GameData.getObstaculo("0x01");
-                    if (obstaculo != null)
-                    {
-                        partida.unidades.Add(new Unidades
-                        {
-                            id = Guid.NewGuid().GetHashCode(),
-                            dono = dono,
-                            obstaculoId = "0x01",
-                            posicao = alvo.posicao,
-                            duracao = obstaculo.duracao,
-                            dano = obstaculo.dano,
-                            hitbox = obstaculo.hitbox,
-                            efeito = obstaculo.tipo
-                        });
-                    }
+                    
                     break;
                 case "invocacaoFraca":
 

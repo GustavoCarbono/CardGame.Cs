@@ -88,13 +88,11 @@ public class ValidarHabilidade
         }
     }
 
-    public int validarHabilidadePassiva(Habilidade? habilidade, string dono, ContextoHabilidade ctx, Obstaculo? obstaculo)
+    public int validarHabilidadePassiva(Habilidade? habilidade, string dono, ContextoHabilidade ctx)
     {
         AplicarHabilidade aplicar = new();
         if (habilidade != null)
         {
-
-
             if (ctx.alvoOriginal == null)
             {
                 if (ctx.unidadeOriginal.habilidade.Any())
@@ -171,7 +169,7 @@ public class ValidarHabilidade
                         {
                             case "": //ainda não definido
                                 break;
-                            //passiva de obstáculo
+                            //gatilho de passiva sem uso de habilidade
                             default:
                                 break;
                         }

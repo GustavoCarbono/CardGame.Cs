@@ -7,7 +7,8 @@
             "combate": 10,
             "hp": 40,
             "passos": 1,
-            "habilidade": ["0x01"]
+            "habilidade": ["0x01"],
+            "img": ""
         },
         {
             "nome": "mago",
@@ -16,7 +17,8 @@
             "combate": 5,
             "hp": 20,
             "passos": 1,
-            "habilidade": ["0x02"]
+            "habilidade": ["0x02"],
+            "img": ""
         },
         {
             "nome": "invocador",
@@ -25,7 +27,8 @@
             "combate": 2,
             "hp": 15,
             "passos": 1,
-            "habilidade": ["0x03"]
+            "habilidade": ["0x03"],
+            "img": ""
         },
         {
             "nome": "sniper",
@@ -34,7 +37,8 @@
             "combate": 5,
             "hp": 30,
             "passos": 1,
-            "habilidade": ["0x04"]
+            "habilidade": ["0x04"],
+            "img": ""
         },
         {
             "nome": "cultista",
@@ -43,7 +47,8 @@
             "combate": 0,
             "hp": 10,
             "passos": 1,
-            "habilidade": ["0x05"]
+            "habilidade": ["0x05"],
+            "img": ""
         }
     ],
     "habilidade": [

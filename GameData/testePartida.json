@@ -17,6 +17,7 @@
     "unidades": [
         {
             "id": 1,
+            "nome": "nome",
             "dono": "jogador1",
             "cartaId": "0x01",
             "posicao": {
@@ -24,6 +25,7 @@
                 "y": 4
             },
             "habilidade" : ["0x01"],
+            "status": "normal",
             "dano": 15,
             "combate": 10,
             "hpMaximo": 40,
@@ -34,6 +36,7 @@
         },
         {
             "id": 2,
+            "nome": "nome",
             "dono": "jogador1",
             "cartaId": "0x03",
             "posicao": {
@@ -41,6 +44,7 @@
                 "y": 3
             },
             "habilidade" : ["0x03"],
+            "status": "normal",
             "dano": 1,
             "combate": 2,
             "hpMaximo": 15,
@@ -51,6 +55,7 @@
         },
         {
             "id": 3,
+            "nome": "nome",
             "dono": "jogador2",
             "cartaId": "0x02",
             "posicao": {
@@ -58,6 +63,7 @@
                 "y": 4
             },
             "habilidade" : ["0x02"],
+            "status": "normal",
             "dano": 10,
             "combate": 5,
             "hpMaximo": 40,
@@ -68,6 +74,7 @@
         },
         {
             "id": 4,
+            "nome": "nome",
             "dono": "jogador2",
             "cartaId": "0x04",
             "posicao": {
@@ -75,6 +82,7 @@
                 "y": 3
             },
             "habilidade" : ["0x04"],
+            "status": "normal",
             "dano": 2,
             "combate": 5,
             "hpMaximo": 15,
@@ -82,19 +90,6 @@
             "gastoMov": 1,
             "jaAtacou": false,
             "jaMoveu": false
-        },
-        {
-            "id": 5,
-            "dono": "player1",
-            "obstaculoId": "0x01",
-            "posicao": {
-                "x": 5,
-                "y": 5
-            },
-            "duração": 2,
-            "dano": 1,
-            "hitbox": false,
-            "efeito": "fogo"
         }
     ],
     "logPlayer1": [

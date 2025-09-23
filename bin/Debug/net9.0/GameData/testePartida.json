@@ -82,19 +82,6 @@
             "gastoMov": 1,
             "jaAtacou": false,
             "jaMoveu": false
-        },
-        {
-            "id": 5,
-            "dono": "player1",
-            "obstaculoId": "0x01",
-            "posicao": {
-                "x": 5,
-                "y": 5
-            },
-            "duração": 2,
-            "dano": 1,
-            "hitbox": false,
-            "efeito": "fogo"
         }
     ],
     "logPlayer1": [

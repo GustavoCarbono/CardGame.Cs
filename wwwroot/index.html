@@ -37,90 +37,28 @@
                     <label for="checkbox-status" class="info-icon" id="status-label">
                         <i class="bi bi-info-circle" id="status-icon"></i>
                     </label>
-            </div>
+                </div>
             </nav>
-
+            <div class="descricao-personagem" id="descricao-personagem">
+            </div>
             <aside id="time">
                 <h2>Seu time</h2>
-                <div class="personagem-scroll">
-                    <div class="personagem-div">
-                        <div class="personagem" draggable="true" data-id="p1">
-                            <h4>ATK 5 HP 5 COMB. 5</h4>
-                            <img class="personagem-img" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/004.png" alt="">
-                            <p class="descricao"><Strong>Bola de fogo:</Strong> cospe uma bola de fogo no inimigo</p>
-                        </div>
-                        <div class="personagem" draggable="true" data-id="p2">
-                            <h4>ATK 10 HP 5 COMB. 5</h4>
-                            <img class="personagem-img" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/025.png" alt="">
-                        </div>
-                    </div>
-                    <div class="personagem-div">
-                        <div class="personagem" draggable="true" data-id="p3">
-                            <h4>ATK 0 HP 99 COMB. 99</h4>
-                            <img class="personagem-img" src="https://static.vecteezy.com/system/resources/thumbnails/022/025/119/small/gray-stone-isolated-on-a-transparent-background-png.png" alt="">
-                            <p class="descricao"><Strong>Nada:</Strong></p>
-                        </div>
-                    </div>
+                <div class="personagem-scroll" id="personagem-container">
                 </div>
             </aside>
             <div id="log">
                 <h2>Log</h2>
                 <div>
-
                 </div>
             </div>
             <div id="status">
                 <h2>Status</h2>
-                <div class="status-scroll">
-                    <div class="info-jogador">
-                        <h3 class="habilidade-restante">Habilidade restante 3</h3>
-                        <h3 class="Movimento-restante">Movimento restante 3</h3>
-                    </div>
-                    <div class="personagem-info-toggle">
-                        <div class="personagem-header">
-                            <h3>Charmander</h5>
-                            <i class="bi bi-caret-down-fill arrow"></i>
-                        </div>
-                        <div class="personagem-descricao">
-                            <p class="p-descricao">
-                                <strong>ATTACK 5 HP 5 COMBATE 5</strong><br>
-                                <strong>Status:</strong> Normal<br>
-                                <strong>Habilidades:</strong> Bola de fogo não usada<br>
-                                Lança Chamas não usada<br>
-                                <strong>cooldown:</strong> 0
-                            </p>
-                        </div>
-                    </div>
-                    <div class="personagem-info-toggle">
-                        <div class="personagem-header">
-                            <h3>Pikachu</h5>
-                            <i class="bi bi-caret-down-fill arrow"></i>
-                        </div>
-                        <div class="personagem-descricao">
-                            <p class="p-descricao">
-                                <strong>ATTACK 5 HP 5 COMBATE 5</strong><br>
-                                <strong>Status:</strong> Queimando<br>
-                                <strong>Habilidades:</strong> Choque do trovão não usada<br>
-                                <strong>cooldown:</strong> 0
-                            </p>
-                        </div>
-                    </div>
-                    <div class="personagem-info-toggle">
-                        <div class="personagem-header">
-                            <h3>Pedra</h5>
-                            <i class="bi bi-caret-down-fill arrow"></i>
-                        </div>
-                        <div class="personagem-descricao">
-                            <p class="p-descricao">
-                                <strong>ATTACK 0 HP 99 COMBATE 99</strong><br>
-                                <strong>Status:</strong> pedra
-                        </div>
-                    </div>
+                <div class="status-scroll" id="status-container">
                 </div>
             </div>
         </section>
-        <script src="js/index.js"></script>
-        <script src="js/canva.js"></script>
+        <script type="module" src="js/index.js"></script>
+        <script type="module" src="js/canva.js"></script>
         <script src="js/partida.js"></script>
     </body>
     </html>

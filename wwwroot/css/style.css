@@ -32,3 +32,46 @@ canvas{
 div{
     align-items: center;
 }
+
+.descricao-personagem {
+    position: absolute;
+    height: 40%;
+    width: 17%;
+    display: none;
+    flex-direction: column;
+    border-radius: 13px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #818181bb;
+}
+
+.habilidades {
+    display: flex;
+    flex-direction: column;
+    margin: 12px 10px;
+    gap: 8px;
+}
+
+.habilidade {
+    padding: 10px 20px;
+    border-radius: 15px;
+    background-color: white;
+}
+
+.cancelar {
+    position: absolute;
+    top: 77%;
+    left: 43%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    color: black;
+    border-radius: 15px;
+    border: none;
+    z-index: 1;
+}
+
+.cancelar i.bi {
+    font-size: 15px;
+    color: black;
+}

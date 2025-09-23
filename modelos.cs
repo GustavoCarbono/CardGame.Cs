@@ -6,7 +6,6 @@ public static class GameData
 {
     public static List<Personagem> Personagem { get; private set; } = new();
     public static List<Habilidade> Habilidade { get; private set; } = new();
-    public static List<Obstaculo> Obstaculo { get; private set; } = new();
 
     static GameData()
     {
@@ -19,7 +18,6 @@ public static class GameData
         {
             if (data.Personagem != null) Personagem = data.Personagem;
             if (data.Habilidade != null) Habilidade = data.Habilidade;
-            if (data.Obstaculo != null) Obstaculo = data.Obstaculo;
         }
     }
 
@@ -32,18 +30,12 @@ public static class GameData
     {
         return Habilidade.FirstOrDefault(h => h.codigo == codigo);
     }
-    
-    public static Obstaculo? getObstaculo(string codigo)
-    {
-        return Obstaculo.FirstOrDefault(o => o.codigo == codigo);
-    }
 }
 
 public class GameDataArquivo
 {
 public List<Personagem> Personagem { get; set; } = new();
 public List<Habilidade> Habilidade { get; set; } = new();
-public List<Obstaculo> Obstaculo { get; set; } = new();
 }
 
 public class Habilidade
@@ -70,19 +62,10 @@ public class Personagem
     public int hp { get; set; }
     public int gastoMov { get; set; }
     public int passos { get; set; }
+    public string img { get; set; } = string.Empty;
 
     public string[]? habilidade { get; set; }
     public Dictionary<string, object> extras { get; set; } = new();
-}
-
-public class Obstaculo
-{
-    public string nome { get; set; } = string.Empty;
-    public string codigo { get; set; } = string.Empty;
-    public int duracao { get; set; }
-    public int dano { get; set; }
-    public bool hitbox { get; set; }
-    public string tipo { get; set; } = string.Empty;
 }
 
 //Tabuleiro e Celula
@@ -152,17 +135,16 @@ public class StatusPlayer
 public class Unidades
 {
     public int id { get; set; } = Guid.NewGuid().GetHashCode();
+    public string nome { get; set; } = string.Empty;
     public string dono { get; set; } = string.Empty;
     public string? cartaId { get; set; } = string.Empty;
-    public string? obstaculoId { get; set; } = string.Empty;
     public Posicao posicao { get; set; } = new();
+    //colocar espaço para status
     public int dano { get; set; }
     public int? combate { get; set; }
     public int? hpMaximo { get; set; }
     public int? hpAtual { get; set; }
     public int? passos { get; set; }
-    public int? duracao { get; set; }
-    public bool? hitbox { get; set; }
     public string? efeito { get; set; }
     public bool? jaMoveu { get; set; }
     public bool? jaAtacou { get; set; }
