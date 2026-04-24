@@ -19,36 +19,13 @@ public class Movimentacao
             {
                 if (unidade.jaMoveu == false)
                 {
-                    if (tabuleiro.Grid[novaPosicao.x, novaPosicao.y].obstaculo)
-                    {
-                        var obstaculo = partida.getUnidadeById(tabuleiro.Grid[novaPosicao.x, novaPosicao.y].idObstaculo ?? 0);
-                        if (obstaculo != null && !(obstaculo.hitbox ?? false))
-                        {
-                            unidade.posicao = novaPosicao;
-                            var movimento = dono == "jogador1" ? partida.statusPlayer1 : partida.statusPlayer2;
-                            movimento.movRestante--;
-                            unidade.jaMoveu = true;
-                            contexto.unidadeAlterada.hpAtual -= obstaculo.dano;
-                            validarHabilidade.validarHabilidadePassiva(null, dono, contexto);
-                            tabuleiro.Grid[novaPosicao.x, novaPosicao.y].ocupante = true;
-                            tabuleiro.Grid[novaPosicao.x, novaPosicao.y].idOcupante = id;
-                            return 200;
-                        }
-                        else
-                        {
-                            return 400;
-                        }
-                    }
-                    else
-                    {
-                        unidade.posicao = novaPosicao;
-                        var movimento = dono == "jogador1" ? partida.statusPlayer1 : partida.statusPlayer2;
-                        movimento.movRestante--;
-                        unidade.jaMoveu = true;
-                        tabuleiro.Grid[novaPosicao.x, novaPosicao.y].ocupante = true;
-                        tabuleiro.Grid[novaPosicao.x, novaPosicao.y].idOcupante = id;
-                        return 200;
-                    }
+                    unidade.posicao = novaPosicao;
+                    var movimento = dono == "jogador1" ? partida.statusPlayer1 : partida.statusPlayer2;
+                    movimento.movRestante--;
+                    unidade.jaMoveu = true;
+                    tabuleiro.Grid[novaPosicao.x, novaPosicao.y].ocupante = true;
+                    tabuleiro.Grid[novaPosicao.x, novaPosicao.y].idOcupante = id;
+                    return 200;
                 }
                 else
                 {
